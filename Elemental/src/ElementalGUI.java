@@ -26,10 +26,13 @@ public class ElementalGUI extends JPanel implements ActionListener, MouseListene
 	public JPanel grid = new JPanel(new GridLayout());
 	public JButton start;
 	
+	Player player = new Player("PlayerIdle.png");
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
 		//Call the paint method of your objects here
+		player.paint(g);
 		
 	}
 	
@@ -39,8 +42,10 @@ public class ElementalGUI extends JPanel implements ActionListener, MouseListene
 	}
 	
 	public ElementalGUI() {
-			
+		
+		int size = 1000;
 		JFrame f = new JFrame("Elemental");
+		f.setSize(new Dimension(size, size));
 		f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		f.setBackground(Color.white);
 		f.setLayout(new BorderLayout());
@@ -60,7 +65,7 @@ public class ElementalGUI extends JPanel implements ActionListener, MouseListene
 	public JPanel UI() {
 		
 	    grid = new JPanel(new GridLayout(5,5));
-			
+		
 	    //creates a title for the game
 	    JButton title = new JButton("ELEMENTAL");
 	    title.setBackground(Color.WHITE);
@@ -69,7 +74,7 @@ public class ElementalGUI extends JPanel implements ActionListener, MouseListene
 	    title.setBorderPainted(false);
 	    title.setFocusable(false);
 	    title.setEnabled(false);
-			
+		
 	    //creates a start button that is white
 	    start = new JButton("start");
 	    start.setBackground(Color.WHITE);
@@ -88,12 +93,14 @@ public class ElementalGUI extends JPanel implements ActionListener, MouseListene
 	    //add buttons directly to the grid
 	    for(int i=0; i<5; i++) {
 	        for(int j=0; j<5; j++) {
+	        	JButton empty = new JButton();
 	            if((i == j-1) && i == 1) {
 	                grid.add(title);
 	            } else if((i == j) && i == 2) {
 	                grid.add(start);
 	            } else {
-	                grid.add(new JButton()); // add empty buttons for other positions
+	            	empty.hide();
+	                grid.add(empty); // add empty buttons for other positions
 	            }
 	        }
 	    }
